@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
-import { ArrowLeft, ExternalLink } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -47,15 +47,8 @@ export default async function EpisodioDetailPage({
           </div>
           <p className="text-sm text-white/40 mt-0.5">
             #{ep.episode_number} · {typeLabels[ep.type] || ep.type}
-            {ep.published_at && ` · ${new Date(ep.published_at).toLocaleDateString('es-ES')}`}
           </p>
         </div>
-        <Link
-          href={`/admin/episodios/${id}/editar`}
-          className="text-sm bg-white text-black font-medium px-4 py-2 rounded-lg hover:bg-white/90 transition-all"
-        >
-          Editar
-        </Link>
       </div>
 
       <div className="space-y-4">
@@ -78,14 +71,8 @@ export default async function EpisodioDetailPage({
               <div key={label} className="flex items-center justify-between">
                 <span className="text-xs text-white/40">{label}</span>
                 {url ? (
-                  
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-white/70 hover:text-white transition-all"
-                  >
+                  <a href={url} className="text-xs text-white/70 hover:text-white transition-all">
                     Ver enlace
-                    <ExternalLink size={11} />
                   </a>
                 ) : (
                   <span className="text-xs text-white/20">No disponible</span>
@@ -94,20 +81,6 @@ export default async function EpisodioDetailPage({
             ))}
           </div>
         </div>
-
-        {ep.transcript && (
-          <div className="bg-white/3 border border-white/8 rounded-xl p-5">
-            <h2 className="text-xs text-white/40 uppercase tracking-wider mb-2">Transcripcion</h2>
-            <p className="text-sm text-white/60 whitespace-pre-wrap line-clamp-10">{ep.transcript}</p>
-          </div>
-        )}
-
-        {ep.summary && (
-          <div className="bg-white/3 border border-white/8 rounded-xl p-5">
-            <h2 className="text-xs text-white/40 uppercase tracking-wider mb-2">Resumen</h2>
-            <p className="text-sm text-white/60">{ep.summary}</p>
-          </div>
-        )}
       </div>
     </div>
   )
