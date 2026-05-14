@@ -18,7 +18,7 @@ export default function LoginPage() {
   email,
   options: {
     shouldCreateUser: true,
-    emailRedirectTo: 'http://localhost:3000/auth/callback',
+    emailRedirectTo: 'https://dev.spicy4tuna.com/auth/callback',
   }
 })
     setLoading(false)
