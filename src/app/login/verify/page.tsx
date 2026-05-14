@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -23,7 +23,7 @@ function VerifyForm() {
       type: 'email',
     })
     setLoading(false)
-    if (error) setError('Código incorrecto o expirado. Inténtalo de nuevo.')
+    if (error) setError('Codigo incorrecto o expirado.')
     else router.push('/admin')
   }
 
@@ -32,13 +32,12 @@ function VerifyForm() {
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
           <h1 className="text-lg font-semibold text-white">Spicy4tuna</h1>
-          <p className="text-sm text-white/40 mt-1">Introduce el código de acceso</p>
+          <p className="text-sm text-white/40 mt-1">Introduce el codigo</p>
         </div>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs text-white/40 mb-1.5">
-              Código enviado a <span className="text-white/60">{email}</span>
+              Codigo enviado a {email}
             </label>
             <input
               type="text"
@@ -58,11 +57,8 @@ function VerifyForm() {
           >
             {loading ? 'Verificando...' : 'Acceder al panel'}
           </button>
-          
-            href="/login"
-            className="block text-center text-xs text-white/30 hover:text-white/60 transition-all"
-          >
-            Volver atrás
+          <a href="/login" className="block text-center text-xs text-white/30">
+            Volver atras
           </a>
         </form>
       </div>
