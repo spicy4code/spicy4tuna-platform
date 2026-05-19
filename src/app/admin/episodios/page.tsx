@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
-import { ArrowLeft, Pencil, ExternalLink, Youtube, Music2, Mic2, Apple } from 'lucide-react'
+import { ArrowLeft, Pencil, ExternalLink, Play, Music2, Mic2, Apple } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
