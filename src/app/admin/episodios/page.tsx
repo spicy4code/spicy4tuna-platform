@@ -9,9 +9,11 @@ const typeLabels: Record<string, string> = {
 }
 
 const statusLabels: Record<string, { label: string; color: string }> = {
-  draft: { label: 'Borrador', color: 'text-white/30 bg-white/5' },
-  published: { label: 'Publicado', color: 'text-green-400 bg-green-400/10' },
-  archived: { label: 'Archivado', color: 'text-white/20 bg-white/5' },
+  sin_empezar: { label: 'Sin empezar', color: 'text-white/30 bg-white/5' },
+  creado: { label: 'Creado', color: 'text-blue-400 bg-blue-400/10' },
+  programado: { label: 'Programado', color: 'text-yellow-400 bg-yellow-400/10' },
+  publicado: { label: 'Publicado', color: 'text-green-400 bg-green-400/10' },
+  cancelado: { label: 'Cancelado', color: 'text-red-400/50 bg-red-400/5' },
 }
 
 export const revalidate = 0
@@ -50,7 +52,7 @@ export default async function EpisodiosPage() {
       <div className="bg-white/3 border border-white/8 rounded-xl">
         <div className="flex items-center gap-4 px-5 py-3 border-b border-white/8 text-xs text-white/30 uppercase tracking-wider">
           <span className="w-12">#</span>
-          <span className="flex-1">Título</span>
+          <span className="flex-1">Titulo</span>
           <span className="w-28">Tipo</span>
           <span className="w-28">Fecha</span>
           <span className="w-24">Estado</span>
@@ -59,14 +61,14 @@ export default async function EpisodiosPage() {
         {!episodes || episodes.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 gap-3">
             <Mic2 size={28} className="text-white/10" />
-            <p className="text-sm text-white/25">No hay episodios todavía</p>
+            <p className="text-sm text-white/25">No hay episodios todavia</p>
             <Link href="/admin/episodios/nuevo" className="text-xs text-white/40 hover:text-white/70 underline transition-all">
               Crear el primer episodio
             </Link>
           </div>
         ) : (
           episodes.map((ep) => {
-            const status = statusLabels[ep.status] || statusLabels.draft
+            const status = statusLabels[ep.status] || { label: ep.status, color: 'text-white/30 bg-white/5' }
             return (
               <Link
                 key={ep.id}

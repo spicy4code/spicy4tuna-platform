@@ -175,7 +175,7 @@ export default function EditarEpisodioPage({ params }: { params: Promise<{ id: s
               name="type"
               value={form.type}
               onChange={handleChange}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/30"
+              className="w-full bg-[#111] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/30"
             >
               <option value="semanal">Semanal</option>
               <option value="extra_spicy">Extra Spicy</option>
@@ -250,7 +250,7 @@ export default function EditarEpisodioPage({ params }: { params: Promise<{ id: s
             name="status"
             value={form.status}
             onChange={handleChange}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/30"
+            className="w-full bg-[#111] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/30"
           >
             <option value="sin_empezar">Sin empezar</option>
             <option value="creado">Creado</option>
