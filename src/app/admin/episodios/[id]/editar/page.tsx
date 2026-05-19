@@ -12,8 +12,9 @@ const statusColors: Record<string, string> = {
   archived: 'text-white/20 bg-white/5',
 }
 
-export default function EditarEpisodioPage({ params }: { params: { id: string } }) {
+export default function EditarEpisodioPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
+  const [episodeId, setEpisodeId] = useState<string>('')
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
   const [saved, setSaved] = useState(false)
@@ -31,18 +32,20 @@ export default function EditarEpisodioPage({ params }: { params: { id: string } 
 
   useEffect(() => {
     const fetchEpisode = async () => {
+      const { id } = await params
+      setEpisodeId(id)
+
       const supabase = createClient()
       const { data, error } = await supabase
         .from('episodes')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single()
 
-     if (error || !data) {
-  console.log('Error:', error, 'Data:', data)
-  router.push('/admin/episodios')
-  return
-}
+      if (error || !data) {
+        router.push('/admin/episodios')
+        return
+      }
 
       setForm({
         episode_number: data.episode_number?.toString() ?? '',
@@ -59,7 +62,7 @@ export default function EditarEpisodioPage({ params }: { params: { id: string } 
     }
 
     fetchEpisode()
-  }, [params.id, router])
+  }, [params, router])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -79,7 +82,7 @@ export default function EditarEpisodioPage({ params }: { params: { id: string } 
         episode_number: parseInt(form.episode_number),
         updated_at: new Date().toISOString(),
       })
-      .eq('id', params.id)
+      .eq('id', episodeId)
 
     setLoading(false)
     if (!error) {
@@ -93,7 +96,7 @@ export default function EditarEpisodioPage({ params }: { params: { id: string } 
   const handleDelete = async () => {
     if (!confirm('Seguro que quieres eliminar este episodio? Esta accion no se puede deshacer.')) return
     const supabase = createClient()
-    const { error } = await supabase.from('episodes').delete().eq('id', params.id)
+    const { error } = await supabase.from('episodes').delete().eq('id', episodeId)
     if (!error) router.push('/admin/episodios')
     else alert('Error al eliminar: ' + error.message)
   }
