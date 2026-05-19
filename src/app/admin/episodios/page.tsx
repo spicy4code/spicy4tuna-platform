@@ -67,7 +67,7 @@ export default async function EpisodioDetailPage({
   const verticalsList = clips?.filter(c => c.type !== 'horizontal') || []
 
   // Ultima metrica por plataforma
-  const metricsByPlatform: Record<string, typeof metrics[0]> = {}
+  const metricsByPlatform: Record<string, any> = {}
   metrics?.forEach(m => {
     if (!metricsByPlatform[m.platform]) {
       metricsByPlatform[m.platform] = m
