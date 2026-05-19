@@ -38,10 +38,11 @@ export default function EditarEpisodioPage({ params }: { params: { id: string } 
         .eq('id', params.id)
         .single()
 
-      if (error || !data) {
-        router.push('/admin/episodios')
-        return
-      }
+     if (error || !data) {
+  console.log('Error:', error, 'Data:', data)
+  router.push('/admin/episodios')
+  return
+}
 
       setForm({
         episode_number: data.episode_number?.toString() ?? '',
