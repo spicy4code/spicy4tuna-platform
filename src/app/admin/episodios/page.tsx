@@ -70,7 +70,7 @@ export default async function EpisodiosPage() {
             return (
               <Link
                 key={ep.id}
-                href={`/admin/episodios/${ep.id}`}
+                href={`/admin/episodios/${ep.id}/editar`}
                 className="flex items-center gap-4 px-5 py-3.5 border-b border-white/5 hover:bg-white/3 transition-all"
               >
                 <span className="w-12 text-sm text-white/30">#{ep.episode_number}</span>

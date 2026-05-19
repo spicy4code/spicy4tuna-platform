@@ -15,14 +15,14 @@ export default function LoginPage() {
     setError('')
     const supabase = createClient()
     const { error } = await supabase.auth.signInWithOtp({
-  email,
-  options: {
-    shouldCreateUser: true,
-    emailRedirectTo: 'http://localhost:3000/auth/callback',
-  }
-})
+      email,
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
     setLoading(false)
-    if (error) setError('Email no encontrado.')
+    if (error) setError('Email no autorizado o error al enviar.')
     else setSent(true)
   }
 
@@ -32,11 +32,13 @@ export default function LoginPage() {
         <div className="w-full max-w-sm text-center space-y-4">
           <p className="text-sm text-white">Revisa tu email</p>
           <p className="text-xs text-white/40">Codigo enviado a {email}</p>
-          <a href={'/login/verify?email=' + encodeURIComponent(email)}
-            className="block w-full bg-white/5 border border-white/10 text-white text-sm py-2.5 rounded-lg text-center">
+          <a
+            href={'/login/verify?email=' + encodeURIComponent(email)}
+            className="block w-full bg-white/5 border border-white/10 text-white text-sm py-2.5 rounded-lg text-center hover:bg-white/10 transition-all"
+          >
             Introducir codigo
           </a>
-          <button onClick={() => setSent(false)} className="text-xs text-white/30">
+          <button onClick={() => setSent(false)} className="text-xs text-white/30 hover:text-white/60 transition-all">
             Usar otro email
           </button>
         </div>
