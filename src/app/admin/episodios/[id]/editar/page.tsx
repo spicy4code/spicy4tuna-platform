@@ -27,7 +27,7 @@ export default function EditarEpisodioPage({ params }: { params: Promise<{ id: s
     url_youtube: '',
     url_spotify: '',
     url_ivoox: '',
-    status: 'draft',
+    status: 'sin_empezar',
   })
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function EditarEpisodioPage({ params }: { params: Promise<{ id: s
         url_youtube: data.url_youtube ?? '',
         url_spotify: data.url_spotify ?? '',
         url_ivoox: data.url_ivoox ?? '',
-        status: data.status ?? 'draft',
+        status: data.status ?? 'sin_empezar',
       })
       setFetching(false)
     }
@@ -252,9 +252,11 @@ export default function EditarEpisodioPage({ params }: { params: Promise<{ id: s
             onChange={handleChange}
             className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/30"
           >
-            <option value="draft">Borrador</option>
-            <option value="published">Publicado</option>
-            <option value="archived">Archivado</option>
+            <option value="sin_empezar">Sin empezar</option>
+            <option value="creado">Creado</option>
+            <option value="programado">Programado</option>
+            <option value="publicado">Publicado</option>
+            <option value="cancelado">Cancelado</option>
           </select>
         </div>
 
